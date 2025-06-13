@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calcul Plaque de Carton</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 12px 15px;
+      margin: 0 auto;
+      font-size: 16px;
+      background-color: #fff;
+      max-width: 480px;
+      box-sizing: border-box;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    header img {
+      max-width: 112px; /* 80% of 140px */
+      height: auto;
+      margin-bottom: 10px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 6px;
+    }
+    input[type="number"], select {
+      width: 100%;
+      padding: 10px 8px;
+      margin-bottom: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .mini-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .mini-row > div {
+      flex: 1;
+    }
+    .mini-input label {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .mini-input input {
+      font-size: 14px;
+      padding: 7px 6px;
+      margin-bottom: 0;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #2a7ae2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1f5fcc;
+    }
+    .result {
+      margin-top: 18px;
+      background: #f7f7f7;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 15px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+    .flex-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+    .flex-row > div {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo box-in emballage.jpg" alt="Logo Box-In" />
+    <h2>Calcul de la Plaque de Carton</h2>
+  </header>
+
+  <div class="flex-row">
+    <div>
+      <label for="length">Longueur (cm):</label>
+      <input type="number" id="length" min="0" inputmode="decimal" />
+    </div>
+    <div>
+      <label for="width">Largeur (cm):</label>
+      <input type="number" id="width" min="0" inputmode="decimal" />
+    </div>
+    <div>
+      <label for="height">Hauteur (cm):</label>
+      <input type="number" id="height" min="0" inputmode="decimal" />
+    </div>
+  </div>
+
+  <div class="mini-row">
+    <div class="mini-input">
+      <label for="flap">Rabat (optionnel):</label>
+      <input type="number" id="flap" min="0" inputmode="decimal" />
+    </div>
+    <div class="mini-input">
+      <label for="glueMargin">Marge collage:</label>
+      <input type="number" id="glueMargin" min="0" inputmode="decimal" />
+    </div>
+  </div>
+
+  <label for="quantity">Quantité :</label>
+  <input type="number" id="quantity" min="1" inputmode="numeric" />
+
+  <label for="cartonType">Type de carton :</label>
+  <select id="cartonType">
+    <option value="tle-tle">Simple cannelure - TLE/TLE (kraft écru)</option>
+    <option value="tle-tlb">Simple cannelure - TLE/TLB (extérieur blanc)</option>
+  </select>
+
+  <button onclick="calculerPlaque()">Calculer</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculerPlaque() {
+      const L = parseFloat(document.getElementById('length').value);
+      const l = parseFloat(document.getElementById('width').value);
+      const H = parseFloat(document.getElementById('height').value);
+      const flapInput = parseFloat(document.getElementById('flap').value);
+      const glueMarginInput = parseFloat(document.getElementById('glueMargin').value);
+      const qty = parseInt(document.getElementById('quantity').value);
+      const cartonType = document.getElementById('cartonType').value;
+
+      if (isNaN(L) || isNaN(l) || isNaN(H) || isNaN(qty)) {
+        alert("Merci de remplir toutes les dimensions principales et la quantité.");
+        return;
+      }
+
+      const flap = isNaN(flapInput) ? H / 2 : flapInput;
+      const glueMargin = isNaN(glueMarginInput) ? 3 : glueMarginInput;
+
+      const largeurPlaque = 2 * (L + l) + glueMargin;
+      const hauteurPlaque = H + 2 * flap;
+      const surface_m2 = (largeurPlaque * hauteurPlaque) / 10000;
+
+      let prix_m2;
+      let description = "";
+
+      if (cartonType === "tle-tle") {
+        description = "Simple cannelure - TLE/TLE (kraft écru)";
+        if (qty < 1000) {
+          prix_m2 = 66.01;
+        } else if (qty < 5000) {
+          prix_m2 = 61.29;
+        } else {
+          prix_m2 = 58.37;
+        }
+      } else if (cartonType === "tle-tlb") {
+        description = "Simple cannelure - TLE/TLB (extérieur blanc)";
+        if (qty < 1000) {
+          prix_m2 = 68.36;
+        } else if (qty < 5000) {
+          prix_m2 = 63.47;
+        } else {
+          prix_m2 = 60.45;
+        }
+      }
+
+      const prix_total = surface_m2 * prix_m2;
+
+      document.getElementById('result').innerHTML = `
+        <strong>Type de carton :</strong> ${description}<br>
+        <strong>Dimensions de la plaque :</strong><br>
+        Largeur : <strong>${largeurPlaque.toFixed(2)} cm</strong><br>
+        Hauteur : <strong>${hauteurPlaque.toFixed(2)} cm</strong><br>
+        Surface totale : <strong>${surface_m2.toFixed(4)} m²</strong><br>
+        Prix au m² : <strong>${prix_m2.toFixed(2)} DA</strong><br>
+        Prix total pour 1 unité : <strong>${prix_total.toFixed(2)} DA</strong>
+      `;
+    }
+  </script>
+</body>
+</html>
