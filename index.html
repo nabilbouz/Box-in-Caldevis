@@ -3,132 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calcul Plaque de Carton</title>
+  <title>Calcul Plaque Mobile</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 12px 15px;
+      padding: 14px;
       margin: 0 auto;
-      font-size: 16px;
-      background-color: #fff;
+      background-color: #ffffff;
       max-width: 480px;
-      box-sizing: border-box;
+      font-size: 16px;
     }
     header {
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
     header img {
-      max-width: 112px; /* 80% of 140px */
+      max-width: 100px;
       height: auto;
-      margin-bottom: 10px;
     }
     label {
-      font-weight: 600;
-      font-size: 15px;
+      font-weight: bold;
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     input[type="number"], select {
       width: 100%;
-      padding: 10px 8px;
-      margin-bottom: 12px;
+      padding: 10px;
       font-size: 16px;
+      margin-bottom: 12px;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
       box-sizing: border-box;
     }
-    .mini-row {
+    .row-3, .row-2 {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 12px;
     }
-    .mini-row > div {
+    .row-3 > div, .row-2 > div {
       flex: 1;
     }
-    .mini-input label {
-      font-size: 13px;
-      margin-bottom: 4px;
-    }
-    .mini-input input {
-      font-size: 14px;
-      padding: 7px 6px;
-      margin-bottom: 0;
-    }
     button {
-      padding: 12px 20px;
-      font-size: 16px;
-      background-color: #2a7ae2;
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      background-color: #0077cc;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
-      width: 100%;
       margin-top: 10px;
-      transition: background-color 0.3s ease;
     }
     button:hover {
-      background-color: #1f5fcc;
+      background-color: #005fa3;
     }
     .result {
       margin-top: 18px;
-      background: #f7f7f7;
+      background-color: #f2f2f2;
       padding: 15px;
       border-radius: 6px;
       font-size: 15px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
       line-height: 1.4;
-      word-wrap: break-word;
-    }
-    .flex-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 15px;
-    }
-    .flex-row > div {
-      flex: 1;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo box-in emballage.jpg" alt="Logo Box-In" />
-    <h2>Calcul de la Plaque de Carton</h2>
+    <img src="logo box-in emballage.jpg" alt="Logo Box-In">
+    <h2>Calcul Plaque Carton</h2>
   </header>
 
-  <div class="flex-row">
+  <!-- Ligne 1 : Longueur, largeur, hauteur -->
+  <div class="row-3">
     <div>
-      <label for="length">Longueur (cm):</label>
-      <input type="number" id="length" min="0" inputmode="decimal" />
+      <label for="length">Longueur (cm)</label>
+      <input type="number" id="length" min="0" inputmode="decimal">
     </div>
     <div>
-      <label for="width">Largeur (cm):</label>
-      <input type="number" id="width" min="0" inputmode="decimal" />
+      <label for="width">Largeur (cm)</label>
+      <input type="number" id="width" min="0" inputmode="decimal">
     </div>
     <div>
-      <label for="height">Hauteur (cm):</label>
-      <input type="number" id="height" min="0" inputmode="decimal" />
+      <label for="height">Hauteur (cm)</label>
+      <input type="number" id="height" min="0" inputmode="decimal">
     </div>
   </div>
 
-  <div class="mini-row">
-    <div class="mini-input">
-      <label for="flap">Rabat (optionnel):</label>
-      <input type="number" id="flap" min="0" inputmode="decimal" />
+  <!-- Ligne 2 : Rabat et Marge collage -->
+  <div class="row-2">
+    <div>
+      <label for="flap">Rabat (auto)</label>
+      <input type="number" id="flap" min="0" inputmode="decimal">
     </div>
-    <div class="mini-input">
-      <label for="glueMargin">Marge collage:</label>
-      <input type="number" id="glueMargin" min="0" inputmode="decimal" />
+    <div>
+      <label for="glueMargin">Marge collage (auto)</label>
+      <input type="number" id="glueMargin" min="0" inputmode="decimal">
     </div>
   </div>
 
   <label for="quantity">Quantité :</label>
-  <input type="number" id="quantity" min="1" inputmode="numeric" />
+  <input type="number" id="quantity" min="1" inputmode="numeric">
 
   <label for="cartonType">Type de carton :</label>
   <select id="cartonType">
-    <option value="tle-tle">Simple cannelure - TLE/TLE (kraft écru)</option>
-    <option value="tle-tlb">Simple cannelure - TLE/TLB (extérieur blanc)</option>
+    <option value="tle-tle">Simple cannelure - TLE/TLE (écru)</option>
+    <option value="tle-tlb">Simple cannelure - TLE/TLB (blanc)</option>
+    <option value="dle-dle">Double cannelure - DLE/DLE (écru)</option>
+    <option value="dle-dlb">Double cannelure - DLE/DLB (blanc)</option>
   </select>
 
   <button onclick="calculerPlaque()">Calculer</button>
@@ -136,6 +118,21 @@
   <div class="result" id="result"></div>
 
   <script>
+    // Auto-remplissage du rabat selon largeur
+    document.getElementById('width').addEventListener('input', () => {
+      const l = parseFloat(document.getElementById('width').value);
+      if (!isNaN(l) && l > 0) {
+        const flap = Math.max(3, l / 2);
+        document.getElementById('flap').value = flap.toFixed(2);
+      }
+    });
+
+    // Marge collage auto à 3 cm
+    document.getElementById('glueMargin').addEventListener('focus', () => {
+      const g = document.getElementById('glueMargin');
+      if (g.value === "") g.value = "3.00";
+    });
+
     function calculerPlaque() {
       const L = parseFloat(document.getElementById('length').value);
       const l = parseFloat(document.getElementById('width').value);
@@ -143,53 +140,53 @@
       const flapInput = parseFloat(document.getElementById('flap').value);
       const glueMarginInput = parseFloat(document.getElementById('glueMargin').value);
       const qty = parseInt(document.getElementById('quantity').value);
-      const cartonType = document.getElementById('cartonType').value;
+      const type = document.getElementById('cartonType').value;
 
       if (isNaN(L) || isNaN(l) || isNaN(H) || isNaN(qty)) {
-        alert("Merci de remplir toutes les dimensions principales et la quantité.");
+        alert("Remplis toutes les dimensions et la quantité.");
         return;
       }
 
-      const flap = isNaN(flapInput) ? H / 2 : flapInput;
+      const flap = isNaN(flapInput) ? Math.max(3, l / 2) : flapInput;
       const glueMargin = isNaN(glueMarginInput) ? 3 : glueMarginInput;
 
       const largeurPlaque = 2 * (L + l) + glueMargin;
       const hauteurPlaque = H + 2 * flap;
-      const surface_m2 = (largeurPlaque * hauteurPlaque) / 10000;
+      const surface = (largeurPlaque * hauteurPlaque) / 10000;
 
-      let prix_m2;
-      let description = "";
+      let prix = 0;
+      let desc = "";
 
-      if (cartonType === "tle-tle") {
-        description = "Simple cannelure - TLE/TLE (kraft écru)";
-        if (qty < 1000) {
-          prix_m2 = 66.01;
-        } else if (qty < 5000) {
-          prix_m2 = 61.29;
-        } else {
-          prix_m2 = 58.37;
-        }
-      } else if (cartonType === "tle-tlb") {
-        description = "Simple cannelure - TLE/TLB (extérieur blanc)";
-        if (qty < 1000) {
-          prix_m2 = 68.36;
-        } else if (qty < 5000) {
-          prix_m2 = 63.47;
-        } else {
-          prix_m2 = 60.45;
-        }
+      switch(type) {
+        case "tle-tle":
+          desc = "Simple cannelure - TLE/TLE (écru)";
+          prix = qty < 1000 ? 66.01 : qty < 5000 ? 61.29 : 58.37;
+          break;
+        case "tle-tlb":
+          desc = "Simple cannelure - TLE/TLB (blanc)";
+          prix = qty < 1000 ? 68.36 : qty < 5000 ? 63.47 : 60.45;
+          break;
+        case "dle-dle":
+          desc = "Double cannelure - DLE/DLE (écru)";
+          prix = qty < 1000 ? 113.19 : qty < 5000 ? 105.10 : 100.10;
+          break;
+        case "dle-dlb":
+          desc = "Double cannelure - DLE/DLB (blanc)";
+          prix = qty < 1000 ? 117.60 : qty < 5000 ? 109.20 : 104.00;
+          break;
       }
 
-      const prix_total = surface_m2 * prix_m2;
+      const prix_total = surface * prix;
 
       document.getElementById('result').innerHTML = `
-        <strong>Type de carton :</strong> ${description}<br>
-        <strong>Dimensions de la plaque :</strong><br>
-        Largeur : <strong>${largeurPlaque.toFixed(2)} cm</strong><br>
-        Hauteur : <strong>${hauteurPlaque.toFixed(2)} cm</strong><br>
-        Surface totale : <strong>${surface_m2.toFixed(4)} m²</strong><br>
-        Prix au m² : <strong>${prix_m2.toFixed(2)} DA</strong><br>
-        Prix total pour 1 unité : <strong>${prix_total.toFixed(2)} DA</strong>
+        <strong>Type :</strong> ${desc}<br>
+        <strong>Largeur plaque :</strong> ${largeurPlaque.toFixed(2)} cm<br>
+        <strong>Hauteur plaque :</strong> ${hauteurPlaque.toFixed(2)} cm<br>
+        <strong>Rabat :</strong> ${flap.toFixed(2)} cm<br>
+        <strong>Marge collage :</strong> ${glueMargin.toFixed(2)} cm<br>
+        <strong>Surface :</strong> ${surface.toFixed(4)} m²<br>
+        <strong>Prix m² :</strong> ${prix.toFixed(2)} DA<br>
+        <strong>Prix unité :</strong> ${prix_total.toFixed(2)} DA
       `;
     }
   </script>
