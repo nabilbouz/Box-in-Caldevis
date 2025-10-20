@@ -74,7 +74,6 @@
     <h2>Calcul Plaque Carton</h2>
   </header>
 
-  <!-- Ligne 1 : Longueur, largeur, hauteur -->
   <div class="row-3">
     <div>
       <label for="length">Longueur (cm)</label>
@@ -90,7 +89,6 @@
     </div>
   </div>
 
-  <!-- Ligne 2 : Rabat et Marge collage -->
   <div class="row-2">
     <div>
       <label for="flap">Rabat (auto)</label>
@@ -108,9 +106,12 @@
   <label for="cartonType">Type de carton :</label>
   <select id="cartonType">
     <option value="tle-tle">Simple cannelure - TLE/TLE (écru)</option>
-    <option value="tle-tlb">Simple cannelure - TLE/TLB (blanc)</option>
-    <option value="dle-dle">Double cannelure - DLE/DLE (écru)</option>
-    <option value="dle-dlb">Double cannelure - DLE/DLB (blanc)</option>
+    <option value="tlb-tle">Simple cannelure - TLB/TLE (blanc)</option>
+    <option value="kle-tle">Simple cannelure - KLE/TLE (kraft)</option>
+    <option value="dd-tle-tle">Double cannelure - DD-TLE/TLE (écru)</option>
+    <option value="dd-tlb-tle">Double cannelure - DD-TLB/TLE (blanc)</option>
+    <option value="dd-kle-tle">Double cannelure - DD-KLE/TLE (kraft)</option>
+    <option value="dd-klb-tle">Double cannelure - DD-KLB/TLE (kraft)</option>
   </select>
 
   <button onclick="calculerPlaque()">Calculer</button>
@@ -160,19 +161,52 @@
       switch(type) {
         case "tle-tle":
           desc = "Simple cannelure - TLE/TLE (écru)";
-          prix = qty < 1000 ? 66.01 : qty < 5000 ? 61.29 : 58.37;
+          if (qty >= 10000) prix = 54.00;
+          else if (qty >= 5000) prix = 58.38;
+          else if (qty >= 1000) prix = 61.30;
+          else prix = 66.00;
           break;
-        case "tle-tlb":
-          desc = "Simple cannelure - TLE/TLB (blanc)";
-          prix = qty < 1000 ? 68.36 : qty < 5000 ? 63.47 : 60.45;
+        case "tlb-tle":
+          desc = "Simple cannelure - TLB/TLE (blanc)";
+          if (qty >= 10000) prix = 55.80;
+          else if (qty >= 5000) prix = 60.47;
+          else if (qty >= 1000) prix = 63.47;
+          else prix = 68.36;
           break;
-        case "dle-dle":
-          desc = "Double cannelure - DLE/DLE (écru)";
-          prix = qty < 1000 ? 113.19 : qty < 5000 ? 105.10 : 100.10;
+        case "kle-tle":
+          desc = "Simple cannelure - KLE/TLE (kraft)";
+          if (qty >= 10000) prix = 60.36;
+          else if (qty >= 5000) prix = 65.47;
+          else if (qty >= 1000) prix = 68.66;
+          else prix = 74.00;
           break;
-        case "dle-dlb":
-          desc = "Double cannelure - DLE/DLB (blanc)";
-          prix = qty < 1000 ? 117.60 : qty < 5000 ? 109.20 : 104.00;
+        case "dd-tle-tle":
+          desc = "Double cannelure - DD-TLE/TLE (écru)";
+          if (qty >= 10000) prix = 92.40;
+          else if (qty >= 5000) prix = 100.00;
+          else if (qty >= 1000) prix = 105.10;
+          else prix = 113.00;
+          break;
+        case "dd-tlb-tle":
+          desc = "Double cannelure - DD-TLB/TLE (blanc)";
+          if (qty >= 10000) prix = 96.00;
+          else if (qty >= 5000) prix = 104.00;
+          else if (qty >= 1000) prix = 109.20;
+          else prix = 117.00;
+          break;
+        case "dd-kle-tle":
+          desc = "Double cannelure - DD-KLE/TLE (kraft)";
+          if (qty >= 10000) prix = 102.00;
+          else if (qty >= 5000) prix = 110.50;
+          else if (qty >= 1000) prix = 116.00;
+          else prix = 125.00;
+          break;
+        case "dd-klb-tle":
+          desc = "Double cannelure - DD-KLB/TLE (kraft)";
+          if (qty >= 10000) prix = 108.00;
+          else if (qty >= 5000) prix = 117.00;
+          else if (qty >= 1000) prix = 122.85;
+          else prix = 132.50;
           break;
       }
 
