@@ -111,7 +111,7 @@
     <option value="dd-tle-tle">Double cannelure - DD-TLE/TLE (écru)</option>
     <option value="dd-tlb-tle">Double cannelure - DD-TLB/TLE (blanc)</option>
     <option value="dd-kle-tle">Double cannelure - DD-KLE/TLE (kraft)</option>
-    <option value="dd-klb-tle">Double cannelure - DD-KLB/TLE (kraft)</option>
+    <option value="dd-klb-tle">Double cannelure - DD-KLB/TLE (kraft-blanc)</option>
   </select>
 
   <button onclick="calculerPlaque()">Calculer</button>
@@ -202,7 +202,7 @@
           else prix = 125.00;
           break;
         case "dd-klb-tle":
-          desc = "Double cannelure - DD-KLB/TLE (kraft)";
+          desc = "Double cannelure - DD-KLB/TLE (kraft-blanc)";
           if (qty >= 10000) prix = 108.00;
           else if (qty >= 5000) prix = 117.00;
           else if (qty >= 1000) prix = 122.85;
@@ -226,3 +226,4 @@
   </script>
 </body>
 </html>
+
