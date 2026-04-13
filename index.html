@@ -158,55 +158,55 @@
       let prix = 0;
       let desc = "";
 
-      switch(type) {
+     switch(type) {
         case "tle-tle":
           desc = "Simple cannelure - TLE/TLE (écru)";
-          if (qty >= 10000) prix = 54.00;
-          else if (qty >= 5000) prix = 58.38;
-          else if (qty >= 1000) prix = 61.30;
-          else prix = 66.00;
+          if (qty >= 10000) prix = 58.03;
+          else if (qty >= 4999) prix = 60.45;
+          else if (qty >= 1000) prix = 62.86;
+          else prix = 71.09;
           break;
         case "tlb-tle":
           desc = "Simple cannelure - TLB/TLE (blanc)";
-          if (qty >= 10000) prix = 55.80;
-          else if (qty >= 5000) prix = 60.47;
-          else if (qty >= 1000) prix = 63.47;
-          else prix = 68.36;
+          if (qty >= 10000) prix = 62.07;
+          else if (qty >= 4999) prix = 64.66;
+          else if (qty >= 1000) prix = 67.24;
+          else prix = 76.56;
           break;
         case "kle-tle":
           desc = "Simple cannelure - KLE/TLE (kraft)";
-          if (qty >= 10000) prix = 60.36;
-          else if (qty >= 5000) prix = 65.47;
-          else if (qty >= 1000) prix = 68.66;
-          else prix = 74.00;
+          if (qty >= 10000) prix = 64.78;
+          else if (qty >= 4999) prix = 67.48;
+          else if (qty >= 1000) prix = 70.18;
+          else prix = 79.36;
           break;
         case "dd-tle-tle":
           desc = "Double cannelure - DD-TLE/TLE (écru)";
-          if (qty >= 10000) prix = 92.40;
-          else if (qty >= 5000) prix = 100.00;
-          else if (qty >= 1000) prix = 105.10;
-          else prix = 113.00;
+          if (qty >= 10000) prix = 94.93;
+          else if (qty >= 4999) prix = 98.88;
+          else if (qty >= 1000) prix = 107.99;
+          else prix = 116.29;
           break;
         case "dd-tlb-tle":
           desc = "Double cannelure - DD-TLB/TLE (blanc)";
-          if (qty >= 10000) prix = 96.00;
-          else if (qty >= 5000) prix = 104.00;
-          else if (qty >= 1000) prix = 109.20;
-          else prix = 117.00;
+          if (qty >= 10000) prix = 98.97;
+          else if (qty >= 4999) prix = 104.00;
+          else if (qty >= 1000) prix = 112.58;
+          else prix = 121.24;
           break;
         case "dd-kle-tle":
           desc = "Double cannelure - DD-KLE/TLE (kraft)";
           if (qty >= 10000) prix = 102.00;
-          else if (qty >= 5000) prix = 110.50;
+          else if (qty >= 4999) prix = 105.92;
           else if (qty >= 1000) prix = 116.00;
           else prix = 125.00;
           break;
         case "dd-klb-tle":
-          desc = "Double cannelure - DD-KLB/TLE (kraft-blanc)";
-          if (qty >= 10000) prix = 108.00;
-          else if (qty >= 5000) prix = 117.00;
-          else if (qty >= 1000) prix = 122.85;
-          else prix = 132.50;
+          desc = "Double cannelure - DD-KLB/TLE (kraft)";
+          if (qty >= 10000) prix = 108.43;
+          else if (qty >= 4999) prix = 112.95;
+          else if (qty >= 1000) prix = 123.35;
+          else prix = 132.83;
           break;
       }
 
